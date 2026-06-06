@@ -112,7 +112,7 @@ namespace AsusFanControlGUI
                     Console.WriteLine("Error!");
 
                     Properties.Settings.Default.wasError = true;
-                    string errorMsg = LocalizationManager.Get("Error.TempOutOfRange", currentTemp);
+                    string errorMsg = LocalizationManager.GetLong("Error.TempOutOfRange", currentTemp);
                     Properties.Settings.Default.errorMsg = errorMsg;
                     Properties.Settings.Default.Save();
 
@@ -234,8 +234,8 @@ namespace AsusFanControlGUI
         {
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             MessageBox.Show(
-                LocalizationManager.Get("Dialog.About.Text", version),
-                LocalizationManager.Get("Dialog.About.Title"),
+                LocalizationManager.GetLong("Dialog.About.Text", version),
+                LocalizationManager.GetLong("Dialog.About.Title"),
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
