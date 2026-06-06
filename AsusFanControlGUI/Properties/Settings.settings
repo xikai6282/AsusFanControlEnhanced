@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AsusFanControlGUI.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
@@ -40,6 +40,14 @@
     </Setting>
     <Setting Name="DefaultFanCurvePoints" Type="System.String" Scope="User">
       <Value Profile="(Default)">20,1-60,1-61,20-70,20-71,30-100,100-105,100</Value>
+    </Setting>
+    <!-- 鈹€鈹€ 鏂板锛歎I 璇█ 鈹€鈹€ -->
+    <Setting Name="uiLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en</Value>
+    </Setting>
+    <!-- 鈹€鈹€ 鏂板锛歎I 涓婚 鈹€鈹€ -->
+    <Setting Name="uiTheme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">light</Value>
     </Setting>
   </Settings>
 </SettingsFile>
