@@ -1,0 +1,46 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:   # 鍏佽鎵嬪姩瑙﹀彂
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 妫€鍑轰唬鐮?        uses: actions/checkout@v4
+
+      - name: 瀹夎 MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: 瀹夎 NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: 杩樺師 NuGet 鍖?        run: nuget restore AsusFanControl.sln
+
+      - name: 缂栬瘧 (Release x64)
+        run: msbuild AsusFanControl.sln /p:Configuration=Release /p:Platform=x64 /p:DeployOnBuild=false /p:PublishProfile=FolderProfile
+
+      - name: 鏀堕泦杈撳嚭鏂囦欢
+        run: |
+          mkdir publish
+          # 涓?GUI 绋嬪簭
+          copy bin\x64\Release\AsusFanControlGUI.exe publish\
+          copy bin\x64\Release\AsusFanControlGUI.exe.config publish\
+          # 鍛戒护琛岀増
+          copy bin\x64\Release\AsusFanControl.exe publish\
+          copy bin\x64\Release\AsusFanControl.exe.config publish\
+          # 渚濊禆 DLL
+          copy bin\x64\Release\*.dll publish\
+          # 鍥炬爣
+          copy AsusFanControlGUI\AppIcon.ico publish\
+
+      - name: 涓婁紶鏋勫缓浜х墿
+        uses: actions/upload-artifact@v4
+        with:
+          name: AsusFanControlEnhanced
+          path: publish\
