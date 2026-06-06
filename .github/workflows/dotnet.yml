@@ -1,28 +1,45 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: Build & Release
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main, master]
   pull_request:
-    branches: [ "main" ]
+    branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore AsusFanControl.sln
+
+      - name: Build (Release x64)
+        run: msbuild AsusFanControl.sln /p:Configuration=Release /p:Platform=x64 /p:DeployOnBuild=false
+
+      - name: Collect artifacts
+        run: |
+          mkdir publish
+          copy bin\x64\Release\AsusFanControlGUI.exe publish\ 2>nul
+          copy bin\x64\Release\AsusFanControlGUI.exe.config publish\ 2>nul
+          copy bin\x64\Release\AsusFanControl.exe publish\ 2>nul
+          copy bin\x64\Release\AsusFanControl.exe.config publish\ 2>nul
+          copy bin\x64\Release\*.dll publish\ 2>nul
+          copy AsusFanControlGUI\AppIcon.ico publish\ 2>nul
+        shell: cmd
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AsusFanControlEnhanced
+          path: publish\
