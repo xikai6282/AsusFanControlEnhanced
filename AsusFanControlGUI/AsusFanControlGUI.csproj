@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Costura.Fody.5.7.0\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.5.7.0\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -289,6 +289,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <!-- 鈹€鈹€ 鏂板锛氳彍鍗曟墿灞曢儴鍒嗙被 鈹€鈹€ -->
+    <Compile Include="Form1.Menus.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <!-- 鈹€鈹€ 鏂板锛氭湰鍦板寲绠＄悊鍣?鈹€鈹€ -->
+    <Compile Include="Localization\LocalizationManager.cs" />
+    <!-- 鈹€鈹€ 鏂板锛氫富棰樼鐞嗗櫒 鈹€鈹€ -->
+    <Compile Include="Theming\ThemeManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
