@@ -528,9 +528,7 @@ namespace AsusFanControlGUI
                     g.FillEllipse(glowBrush, x - 7, y - 7, 14, 14);
                 }
 
-                // 瀹炲績鐐?                bool isSelected = selectedPointId != 0
-                    && fanCurvePoints.ContainsKey(selectedPointId)
-                    && fanCurvePoints[selectedPointId] == point;
+                // 瀹炲績鐐?                bool isSelected = selectedPointId != 0 && fanCurvePoints.ContainsKey(selectedPointId) && fanCurvePoints[selectedPointId] == point;
 
                 Color pointColor = isSelected ? ThemeManager.GraphPtDr : ThemeManager.GraphPt;
                 using (Brush ptBrush = new SolidBrush(pointColor))
